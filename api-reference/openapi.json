@@ -29,32 +29,53 @@
           {
             "name": "Time-Zone",
             "in": "header",
+            "description": "Time zone of the request",
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "Asia/Calcutta"
           },
           {
             "name": "User-Agent",
             "in": "header",
+            "description": "User agent of the request",
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "Mozilla/5.0"
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "type": "string",
-                "description": "encrypted data"
+                "type": "string"
               }
             }
           },
           "required": true
         },
         "responses": {
+          "200": {
+            "description": "list of all",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "401": {
+            "description": "unauthenticated",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
           "400": {
             "description": "invalid data",
             "content": {
@@ -65,26 +86,8 @@
               }
             }
           },
-          "200": {
-            "description": "list of all ",
-            "content": {
-              "application/json": {
-                "example": "eyJkYXRhIjoibGUvUzNCOXZhWDVTK1VGdGJtdXZ6TDA2d2RueTMvMlcyd09VQUFRcnpobnpDR2NZSWpadTdieFU5QXE3RGtGZVhQZC9Sdm9BczVlMGsrQUNkZ0Rqd0IwcCtPekI0aktPLzdFMXRVdmQ0Z2ZSa1VZR1dZeEdOOW9RdmI4SkUvM1dLS3VKd3loNk5qeGJjd244YjZhck5ZZHVMcnhiMUNxYmlGSS9sMWxhWnJhQzRIT2pHcWJOVS8yelIxQmhlWTF4ZmFJR015L2tJY01zM0R4ekZDRktnTGpwa3dSZzB"
-              }
-            }
-          },
           "500": {
             "description": "Internal server error",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "unauthenticated",
             "content": {
               "*/*": {
                 "schema": {

@@ -1,127 +1,181 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
-    },
-    "version": "1.0.0"
+    "title": "Demo Service",
+    "description": "API Documentation",
+    "version": "v2"
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
     }
   ],
-  "security": [
+  "tags": [
     {
-      "bearerAuth": []
+      "name": "Payment Service",
+      "description": "Microservices related to payment"
     }
   ],
   "paths": {
-    "/plants": {
-      "get": {
-        "description": "Returns all plants from the system that the user has access to",
+    "/api/v2/customer/payment-link/get-by-filter": {
+      "post": {
+        "tags": [
+          "Payment Service"
+        ],
+        "description": "Get payment links by filter",
+        "operationId": "getPaymentLinksByFilter",
         "parameters": [
           {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
+            "name": "Time-Zone",
+            "in": "header",
+            "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
+            }
+          },
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "description": "user-agent",
+            "required": true,
+            "content": {
+              "*/*": {
+                "example": "https://stage1.omnispay.com"
+              }
             }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "Plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "description": "Creates a new plant in the store",
         "requestBody": {
-          "description": "Plant to add to the store",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+                "type": "string",
+                "description": "encrypted data"
               }
             }
           },
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "plant response",
+          "400": {
+            "description": "invalid data",
             "content": {
-              "application/json": {
+              "*/*": {
                 "schema": {
-                  "$ref": "#/components/schemas/Plant"
+                  "type": "string"
                 }
               }
             }
           },
-          "400": {
-            "description": "unexpected error",
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthenticated",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "list of all ",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
+                "example": "eyJkYXRhIjoibGUvUzNCOXZhWDVTK1VGdGJtdXZ6TDA2d2RueTMvMlcyd09VQUFRcnpobnpDR2NZSWpadTdieFU5QXE3RGtGZVhQZC9Sdm9BczVlMGsrQUNkZ0Rqd0IwcCtPekI0aktPLzdFMXRVdmQ0Z2ZSa1VZR1dZeEdOOW9RdmI4SkUvM1dLS3VKd3loNk5qeGJjd244YjZhck5ZZHVMcnhiMUNxYmlGSS9sMWxhWnJhQzRIT2pHcWJOVS8yelIxQmhlWTF4ZmFJR015L2tJY01zM0R4ekZDRktnTGpwa3dSZzB"
               }
             }
           }
         }
       }
     },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
+    "/api/v2/customer/payment-link/generate": {
+      "post": {
+        "tags": [
+          "Payment Service"
+        ],
+        "description": "Generate payment link",
+        "operationId": "generatePaymentLinkForCustomer",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
+            "name": "Time-Zone",
+            "in": "header",
+            "description": "Time-zone",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
+            "content": {
+              "*/*": {
+                "example": "Asia/Calcutta"
+              }
+            }
+          },
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "description": "user-agent",
+            "required": true,
+            "content": {
+              "*/*": {
+                "example": "https://stage1.omnispay.com"
+              }
             }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "description": "encrypted data"
+              }
+            }
           },
+          "required": true
+        },
+        "responses": {
           "400": {
-            "description": "unexpected error",
+            "description": "invalid data",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "list of all ",
             "content": {
               "application/json": {
+                "example": "eyJkYXRhIjoibGUvUzNCOXZhWDVTK1VGdGJtdXZ6TDA2d2RueTMvMlcyd09VQUFRcnpobnpDR2NZSWpadTdieFU5QXE3RGtGZVhQZC9Sdm9BczVlMGsrQUNkZ0Rqd0IwcCtPekI0aktPLzdFMXRVdmQ0Z2ZSa1VZR1dZeEdOOW9RdmI4SkUvM1dLS3VKd3loNk5qeGJjd244YjZhck5ZZHVMcnhiMUNxYmlGSS9sMWxhWnJhQzRIT2pHcWJOVS8yelIxQmhlWTF4ZmFJR015L2tJY01zM0R4ekZDRktnTGpwa3dSZzB"
+              }
+            }
+          },
+          "401": {
+            "description": "unauthenticated",
+            "content": {
+              "*/*": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "type": "object"
                 }
               }
             }
@@ -131,65 +185,6 @@
     }
   },
   "components": {
-    "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
-          },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
-          }
-        }
-      },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
-          },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
-            }
-          }
-        ]
-      },
-      "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
-      }
-    }
+
   }
 }

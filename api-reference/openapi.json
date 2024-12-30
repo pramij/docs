@@ -23,23 +23,10 @@
         "tags": [
           "Payment Service"
         ],
-        "description": "Get Message",
+        "summary": "Get all data",
+        "description": "Returns all data from the system that the user has access to",
         "operationId": "getMessage",
         "responses": {
-          "200": {
-            "description": "list of all ",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": 200,
-                  "message": "Request data validation failed",
-                  "response": {
-
-                  }
-                }
-              }
-            }
-          },
           "400": {
             "description": "invalid data",
             "content": {
@@ -57,6 +44,14 @@
                 "schema": {
                   "type": "string"
                 }
+              }
+            }
+          },
+          "200": {
+            "description": "list of all ",
+            "content": {
+              "application/json": {
+                "example": "eyJkYXRhIjoibGUvUzNCOXZhWDVTK1VGdGJtdXZ6TDA2d2RueTMvMlcyd09VQUFRcnpobnpDR2NZSWpadTdieFU5QXE3RGtGZVhQZC9Sdm9BczVlMGsrQUNkZ0Rqd0IwcCtPekI0aktPLzdFMXRVdmQ0Z2ZSa1VZR1dZeEdOOW9RdmI4SkUvM1dLS3VKd3loNk5qeGJjd244YjZhck5ZZHVMcnhiMUNxYmlGSS9sMWxhWnJhQzRIT2pHcWJOVS8yelIxQmhlWTF4ZmFJR015L2tJY01zM0R4ekZDRktnTGpwa3dSZzB"
               }
             }
           },

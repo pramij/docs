@@ -18,87 +18,6 @@
     }
   ],
   "paths": {
-    "/api/v2/customer/payment-link/get-by-filter": {
-      "post": {
-        "tags": [
-          "Payment Service"
-        ],
-        "description": "Get payment links by filter",
-        "operationId": "getPaymentLinksByFilter",
-        "parameters": [
-          {
-            "name": "Time-Zone",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "User-Agent",
-            "in": "header",
-            "description": "user-agent",
-            "required": true,
-            "content": {
-              "*/*": {
-                "example": "https://stage1.omnispay.com"
-              }
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "string",
-                "description": "encrypted data"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "400": {
-            "description": "invalid data",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "unauthenticated",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "list of all ",
-            "content": {
-              "application/json": {
-                "example": "eyJkYXRhIjoibGUvUzNCOXZhWDVTK1VGdGJtdXZ6TDA2d2RueTMvMlcyd09VQUFRcnpobnpDR2NZSWpadTdieFU5QXE3RGtGZVhQZC9Sdm9BczVlMGsrQUNkZ0Rqd0IwcCtPekI0aktPLzdFMXRVdmQ0Z2ZSa1VZR1dZeEdOOW9RdmI4SkUvM1dLS3VKd3loNk5qeGJjd244YjZhck5ZZHVMcnhiMUNxYmlGSS9sMWxhWnJhQzRIT2pHcWJOVS8yelIxQmhlWTF4ZmFJR015L2tJY01zM0R4ekZDRktnTGpwa3dSZzB"
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v2/customer/payment-link/generate": {
       "post": {
         "tags": [
@@ -152,6 +71,14 @@
               }
             }
           },
+          "200": {
+            "description": "list of all ",
+            "content": {
+              "application/json": {
+                "example": "eyJkYXRhIjoibGUvUzNCOXZhWDVTK1VGdGJtdXZ6TDA2d2RueTMvMlcyd09VQUFRcnpobnpDR2NZSWpadTdieFU5QXE3RGtGZVhQZC9Sdm9BczVlMGsrQUNkZ0Rqd0IwcCtPekI0aktPLzdFMXRVdmQ0Z2ZSa1VZR1dZeEdOOW9RdmI4SkUvM1dLS3VKd3loNk5qeGJjd244YjZhck5ZZHVMcnhiMUNxYmlGSS9sMWxhWnJhQzRIT2pHcWJOVS8yelIxQmhlWTF4ZmFJR015L2tJY01zM0R4ekZDRktnTGpwa3dSZzB"
+              }
+            }
+          },
           "500": {
             "description": "Internal server error",
             "content": {
@@ -159,14 +86,6 @@
                 "schema": {
                   "type": "object"
                 }
-              }
-            }
-          },
-          "200": {
-            "description": "list of all ",
-            "content": {
-              "application/json": {
-                "example": "eyJkYXRhIjoibGUvUzNCOXZhWDVTK1VGdGJtdXZ6TDA2d2RueTMvMlcyd09VQUFRcnpobnpDR2NZSWpadTdieFU5QXE3RGtGZVhQZC9Sdm9BczVlMGsrQUNkZ0Rqd0IwcCtPekI0aktPLzdFMXRVdmQ0Z2ZSa1VZR1dZeEdOOW9RdmI4SkUvM1dLS3VKd3loNk5qeGJjd244YjZhck5ZZHVMcnhiMUNxYmlGSS9sMWxhWnJhQzRIT2pHcWJOVS8yelIxQmhlWTF4ZmFJR015L2tJY01zM0R4ekZDRktnTGpwa3dSZzB"
               }
             }
           },

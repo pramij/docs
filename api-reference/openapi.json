@@ -37,12 +37,9 @@
           {
             "name": "User-Agent",
             "in": "header",
-            "description": "user-agent",
             "required": true,
-            "content": {
-              "*/*": {
-                "example": "https://stage1.omnispay.com"
-              }
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -58,20 +55,6 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "list of all ",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": 200,
-                  "message": "Request data validation failed",
-                  "response": {
-
-                  }
-                }
-              }
-            }
-          },
           "400": {
             "description": "invalid data",
             "content": {
@@ -79,6 +62,14 @@
                 "schema": {
                   "type": "object"
                 }
+              }
+            }
+          },
+          "200": {
+            "description": "list of all ",
+            "content": {
+              "application/json": {
+                "example": "eyJkYXRhIjoibGUvUzNCOXZhWDVTK1VGdGJtdXZ6TDA2d2RueTMvMlcyd09VQUFRcnpobnpDR2NZSWpadTdieFU5QXE3RGtGZVhQZC9Sdm9BczVlMGsrQUNkZ0Rqd0IwcCtPekI0aktPLzdFMXRVdmQ0Z2ZSa1VZR1dZeEdOOW9RdmI4SkUvM1dLS3VKd3loNk5qeGJjd244YjZhck5ZZHVMcnhiMUNxYmlGSS9sMWxhWnJhQzRIT2pHcWJOVS8yelIxQmhlWTF4ZmFJR015L2tJY01zM0R4ekZDRktnTGpwa3dSZzB"
               }
             }
           },

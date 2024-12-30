@@ -34,6 +34,7 @@
   "anchors": [
     {
       "name": "Documentation",
+      "openapi":"http://localhost:8080/v3/api-docs",
       "icon": "book-open-cover",
       "url": "https://mintlify.com/docs"
     },

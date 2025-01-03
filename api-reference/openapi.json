@@ -1,98 +1,115 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Demo Service",
+    "title": "Authorization",
     "description": "API Documentation",
     "version": "v2"
   },
   "servers": [
     {
-      "url": "http://localhost:8080",
+      "url": "http://localhost:7001/auth",
       "description": "Generated server url"
     }
   ],
   "tags": [
     {
-      "name": "Payment Service",
-      "description": "Microservices related to payment"
+      "name": "Sample API",
+      "description": "API to demonstrate sample response"
     }
   ],
   "paths": {
-    "/api/v2/customer/payment-link/generate": {
+    "/api/v2/authenticate/login": {
       "post": {
         "tags": [
-          "Payment Service"
+          "Sample API"
         ],
-        "description": "Generate payment link",
-        "operationId": "generatePaymentLinkForCustomer",
+        "description": "Authenticate user and generate JWT tokens",
+        "operationId": "loginUser",
         "parameters": [
           {
             "name": "Time-Zone",
             "in": "header",
-            "description": "Time zone of the request",
             "required": true,
             "schema": {
               "type": "string"
-            },
-            "example": "Asia/Calcutta"
+            }
           },
           {
             "name": "User-Agent",
             "in": "header",
-            "description": "User agent of the request",
             "required": true,
             "schema": {
               "type": "string"
-            },
-            "example": "Mozilla/5.0"
+            }
           }
         ],
         "requestBody": {
+          "description": "Encrypted user login details",
           "content": {
             "application/json": {
               "schema": {
-                "type": "string"
+                "$ref": "#/components/schemas/UserLoginRequest"
+              },
+              "example": {
+                "email": "user@example.com",
+                "password": "Password123",
+                "requestId": "12345",
+                "isDeviceJailBroken": false
               }
             }
           },
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "list of all",
+          "400": {
+            "description": "Invalid data",
             "content": {
               "application/json": {
-
-              }
-            }
-          },
-          "401": {
-            "description": "unauthenticated",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
+                "example": {
+                  "status": "FAILURE",
+                  "message": "Invalid request data"
                 }
               }
             }
           },
-          "400": {
-            "description": "invalid data",
+          "200": {
+            "description": "User successfully authenticated and tokens generated",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/CommonResponse"
+                },
+                "example": {
+                  "status": "SUCCESS",
+                  "message": "Login successful",
+                  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
+                  "tokenType": "Bearer",
+                  "response": null,
+                  "expiryTime": "2025-01-03T12:34:56.789Z",
+                  "requestId": "12345"
                 }
               }
             }
           },
           "500": {
-            "description": "Internal server error",
+            "description": "Encryption/Decryption failure",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/CommonResponse"
+                },
+                "example": {
+                  "status": "FAILURE",
+                  "message": "Encryption/Decryption failure"
                 }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthenticated",
+            "content": {
+              "application/json": {
+
               }
             }
           }
@@ -101,6 +118,59 @@
     }
   },
   "components": {
-
+    "schemas": {
+      "UserLoginRequest": {
+        "required": [
+          "email",
+          "password",
+          "requestId"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 20,
+            "minLength": 8,
+            "pattern": "^(?!.*\\s)(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}(?\u003C!\\s)$",
+            "type": "string"
+          },
+          "requestId": {
+            "type": "string"
+          },
+          "isDeviceJailBroken": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CommonResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "accessToken": {
+            "type": "string"
+          },
+          "tokenType": {
+            "type": "string"
+          },
+          "response": {
+            "type": "object"
+          },
+          "expiryTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "requestId": {
+            "type": "string"
+          }
+        }
+      }
+    }
   }
 }

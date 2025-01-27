@@ -28,6 +28,8 @@
         "tags": [
           "Third-Party Payment Link Operations"
         ],
+        "summary": "Regenerate Payment Link",
+        "description": "Regenerate payment link for the user based on the provided request parameters.",
         "operationId": "regeneratePaymentLinkForCustomer",
         "parameters": [
           {
@@ -48,6 +50,7 @@
           }
         ],
         "requestBody": {
+          "description": "Request payload for regenerating payment link",
           "content": {
             "application/json": {
               "schema": {
@@ -60,6 +63,56 @@
         "responses": {
           "400": {
             "description": "Bad Request. The input data is invalid or malformed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. You do not have permission to access this resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK. Payment link regenerated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict. The request could not be completed due to a conflict with the current state of the resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Access is denied due to invalid credentials or missing authentication token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred on the server",
             "content": {
               "application/json": {
                 "schema": {
@@ -87,56 +140,6 @@
                 }
               }
             }
-          },
-          "403": {
-            "description": "Forbidden. You do not have permission to access this resource",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict. The request could not be completed due to a conflict with the current state of the resource",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error. An unexpected error occurred on the server",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "OK. Payment link regenerated successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Access is denied due to invalid credentials or missing authentication token",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
           }
         }
       }
@@ -146,6 +149,8 @@
         "tags": [
           "Third-Party Payment Link Operations"
         ],
+        "summary": "Retrieve the payment links by requested filter",
+        "description": "This POST API is used to retrieve the payment links by requested filter",
         "operationId": "getPaymentLinksByFilter",
         "parameters": [
           {
@@ -166,6 +171,7 @@
           }
         ],
         "requestBody": {
+          "description": "Request payload for retrieve the payment links by requested filter",
           "content": {
             "application/json": {
               "schema": {
@@ -186,38 +192,8 @@
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error. An unexpected error occurred while processing the request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "OK. Payment links retrieved successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Too Many Requests. The user has exceeded the allowed number of requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict. A conflict occurred while processing the filter criteria",
+          "404": {
+            "description": "Not Found. No payment links match the specified filter criteria",
             "content": {
               "application/json": {
                 "schema": {
@@ -236,8 +212,18 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found. No payment links match the specified filter criteria",
+          "429": {
+            "description": "Too Many Requests. The user has exceeded the allowed number of requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred while processing the request",
             "content": {
               "application/json": {
                 "schema": {
@@ -248,6 +234,26 @@
           },
           "401": {
             "description": "Unauthorized. Access is denied due to invalid credentials or missing authentication token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict. A conflict occurred while processing the filter criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK. Payment links retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -307,26 +313,6 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found. The requested resource could not be found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Too Many Requests. The user has sent too many requests in a given amount of time",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
           "403": {
             "description": "Forbidden. You do not have permission to access this resource",
             "content": {
@@ -339,16 +325,6 @@
           },
           "409": {
             "description": "Conflict. The request could not be completed due to a conflict with the current state of the resource",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error. An unexpected error occurred on the server",
             "content": {
               "application/json": {
                 "schema": {
@@ -376,6 +352,36 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred on the server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found. The requested resource could not be found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests. The user has sent too many requests in a given amount of time",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -385,6 +391,8 @@
         "tags": [
           "Third-Party Payment Link Operations"
         ],
+        "summary": "Retrieve the payment links record by payment link id.",
+        "description": "This GET API is used to retrieve the payment links record by payment link id.",
         "operationId": "getPaymentLinkRecord",
         "parameters": [
           {
@@ -415,38 +423,8 @@
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error. An unexpected error occurred while processing the request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict. A conflict occurred while retrieving the payment link record",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Too Many Requests. The user has exceeded the allowed number of requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found. No payment link record exists for the specified ID",
+          "403": {
+            "description": "Forbidden. You do not have permission to access this payment link record",
             "content": {
               "application/json": {
                 "schema": {
@@ -465,8 +443,28 @@
               }
             }
           },
-          "403": {
-            "description": "Forbidden. You do not have permission to access this payment link record",
+          "429": {
+            "description": "Too Many Requests. The user has exceeded the allowed number of requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict. A conflict occurred while retrieving the payment link record",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred while processing the request",
             "content": {
               "application/json": {
                 "schema": {
@@ -477,6 +475,16 @@
           },
           "401": {
             "description": "Unauthorized. Access is denied due to invalid credentials or missing authentication token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found. No payment link record exists for the specified ID",
             "content": {
               "application/json": {
                 "schema": {
@@ -536,8 +544,8 @@
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error. An unexpected error occurred while processing the request",
+          "403": {
+            "description": "Forbidden. You do not have permission to perform this action",
             "content": {
               "application/json": {
                 "schema": {
@@ -556,16 +564,6 @@
               }
             }
           },
-          "200": {
-            "description": "OK. Payment link record deleted successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
           "409": {
             "description": "Conflict. The payment link record could not be deleted due to a conflict with the current state",
             "content": {
@@ -576,8 +574,8 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found. The payment link record with the specified ID does not exist",
+          "200": {
+            "description": "OK. Payment link record deleted successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -586,8 +584,8 @@
               }
             }
           },
-          "403": {
-            "description": "Forbidden. You do not have permission to perform this action",
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred while processing the request",
             "content": {
               "application/json": {
                 "schema": {
@@ -598,6 +596,16 @@
           },
           "401": {
             "description": "Unauthorized. Access is denied due to invalid credentials or missing authentication token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found. The payment link record with the specified ID does not exist",
             "content": {
               "application/json": {
                 "schema": {

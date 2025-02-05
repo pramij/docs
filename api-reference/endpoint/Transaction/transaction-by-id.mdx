@@ -1,0 +1,28 @@
+---
+title: "Retrieve Transaction Status"
+openapi: "GET /transactions-history/get/{id}"
+---
+
+# Retrieve Transaction by ID
+
+This endpoint retrieves **transaction details** from the database based on the provided transaction ID.
+
+## Path Parameters
+
+- **id** (string, required):  
+  The unique identifier of the transaction record to be retrieved.  
+  - Example: `123457`  
+  - If a valid ID is provided, the API will return the transaction details.
+
+📌 **How it Works**  
+The system fetches transaction data for the given ID and returns transaction details.
+
+## Request Headers
+
+- **User-Agent** (string, optional): The User-Agent header, which is not mandatory.
+
+## Example Request
+
+```http
+GET /transaction/get/123457
+User-Agent: Mozilla/5.0

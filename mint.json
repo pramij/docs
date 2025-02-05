@@ -75,14 +75,24 @@
     {
       "group": "Transactions",
       "pages": [
-        "api-reference/endpoint/Transaction/get-transaction",
-        "api-reference/endpoint/Transaction/transaction-by-id"
+        {
+          "group": "Transaction Status",
+          "pages": [
+            "api-reference/endpoint/transaction/get-transaction",
+            "api-reference/endpoint/transaction/transaction-by-id"
+          ]
+        }
       ]
     },
-     {
+      {
       "group": "Business",
       "pages": [
-       "api-reference/endpoint/Business/get"
+        {
+          "group": "Business Details",
+          "pages": [
+            "api-reference/endpoint/business/get"
+          ]
+        }
       ]
     }
   ],

@@ -1,12 +1,12 @@
 {
- "name": "API docs",
+  "name": "API docs",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/images/omnis-for-black.png",
+    "light": "/images/omnispay-logo.png"
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#0D9373",
+    "primary": "#222123",
     "light": "#07C983",
     "dark": "#0D9373",
     "anchors": {
@@ -17,7 +17,7 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:hi@op.com"
     }
   ],
   "tabs": [
@@ -39,16 +39,20 @@
     {
       "group": "Payments",
       "pages": [
+        {
+          "group": "Payment Links",
+          "pages": [
             "api-reference/endpoint/create",
             "api-reference/endpoint/delete",
             "api-reference/endpoint/get",
             "api-reference/endpoint/get-by-filter"
-      ]
+            
+          ]
         }
       ]
     },
     {
-      "group": "Transaction",
+      "group": "Transactions",
       "pages": [
         {
           "group": "Transaction Status",
@@ -59,7 +63,7 @@
         }
       ]
     },
-   {
+     {
       "group": "Business",
       "pages": [
         {

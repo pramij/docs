@@ -84,8 +84,8 @@
     {
       "group": "Transactions",
       "pages": [
-        "api-reference/endpoint/transaction/get-transaction",
-        "api-reference/endpoint/transaction/transaction-by-id"
+        "api-reference/endpoint/Transaction/get-transaction",
+        "api-reference/endpoint/Transaction/transaction-by-id"
       ]
     }
   ],

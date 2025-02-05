@@ -87,6 +87,12 @@
         "api-reference/endpoint/Transaction/get-transaction",
         "api-reference/endpoint/Transaction/transaction-by-id"
       ]
+    },
+     {
+      "group": "Business",
+      "pages": [
+       "api-reference/endpoint/Business/get"
+      ]
     }
   ],
   "footerSocials": {

@@ -1,45 +1,38 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "API Documentation",
-    "description": "API Documentation with Authorization Header",
-    "version": "1.0"
+    "title": "OP APIs",
+    "description": "OP APIs",
+    "version": "1.0.0",
+    "license": {
+            "name": "MIT"
+        }
   },
   "servers": [
-    {
-      "url": "http://localhost:7007/payment",
-      "description": "Generated server url"
-    }
+       {
+            "url": "https://pro.op.com",
+            "description": "Production server"
+        },
+        {
+            "url": "https://staging1.op.com",
+            "description": "Sandbox server for testing and integration without affecting live data"
+        }
   ],
   "security": [
     {
-      "Authorization": []
-    }
-  ],
-  "tags": [
-    {
-      "name": "Third-Party Payment Link Operations",
-      "description": "APIs for managing, generating, and viewing payment links for third-party integration"
+      "apiKey": []
     }
   ],
   "paths": {
-    "/api/v3/public/customer/payment-link/re-generate": {
-      "post": {
+    "/payment-link/delete/{id}": {
+      "put": {
         "tags": [
           "Third-Party Payment Link Operations"
         ],
-        "summary": "Regenerate Payment Link",
-        "description": "Regenerate payment link for the user based on the provided request parameters.",
-        "operationId": "regeneratePaymentLinkForCustomer",
+        "summary": "Soft delete a payment link record",
+        "description": "This DELETE API is used to process a soft delete of a payment link record from the database.",
+        "operationId": "deletePaymentLinkRecord",
         "parameters": [
-          {
-            "name": "Time-Zone",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "name": "User-Agent",
             "in": "header",
@@ -47,32 +40,20 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Order ID for retrieving the payment link record",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
-        "requestBody": {
-          "description": "Request payload for regenerating payment link",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PaymentLinkPublicRequest"
-              }
-            }
-          },
-          "required": true
-        },
         "responses": {
           "400": {
-            "description": "Bad Request. The input data is invalid or malformed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. You do not have permission to access this resource",
+            "description": "Bad Request. Invalid payment link ID or input data",
             "content": {
               "application/json": {
                 "schema": {
@@ -82,118 +63,7 @@
             }
           },
           "200": {
-            "description": "OK. Payment link regenerated successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict. The request could not be completed due to a conflict with the current state of the resource",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Access is denied due to invalid credentials or missing authentication token",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error. An unexpected error occurred on the server",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found. The requested resource could not be found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Too Many Requests. The user has sent too many requests in a given amount of time",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v3/public/customer/payment-link/get-by-filter": {
-      "post": {
-        "tags": [
-          "Third-Party Payment Link Operations"
-        ],
-        "summary": "Retrieve the payment links by requested filter",
-        "description": "This POST API is used to retrieve the payment links by requested filter",
-        "operationId": "getPaymentLinksByFilter",
-        "parameters": [
-          {
-            "name": "Time-Zone",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "User-Agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "Request payload for retrieve the payment links by requested filter",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RequestFilter"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "400": {
-            "description": "Bad Request. Invalid filter criteria or input data",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found. No payment links match the specified filter criteria",
+            "description": "OK. Payment link record deleted successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -232,6 +102,16 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict. The payment link record could not be deleted due to a conflict with the current state",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
           "401": {
             "description": "Unauthorized. Access is denied due to invalid credentials or missing authentication token",
             "content": {
@@ -242,18 +122,8 @@
               }
             }
           },
-          "409": {
-            "description": "Conflict. A conflict occurred while processing the filter criteria",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "OK. Payment links retrieved successfully",
+          "404": {
+            "description": "Not Found. The payment link record with the specified ID does not exist",
             "content": {
               "application/json": {
                 "schema": {
@@ -265,7 +135,7 @@
         }
       }
     },
-    "/api/v3/public/customer/payment-link/generate": {
+    "/payment-link/generate": {
       "post": {
         "tags": [
           "Third-Party Payment Link Operations"
@@ -277,7 +147,7 @@
           {
             "name": "Time-Zone",
             "in": "header",
-            "required": false,
+            "required": true,
             "schema": {
               "type": "string"
             }
@@ -323,8 +193,8 @@
               }
             }
           },
-          "409": {
-            "description": "Conflict. The request could not be completed due to a conflict with the current state of the resource",
+          "404": {
+            "description": "Not Found. The requested resource could not be found",
             "content": {
               "application/json": {
                 "schema": {
@@ -335,6 +205,26 @@
           },
           "200": {
             "description": "OK. Payment link generated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict. The request could not be completed due to a conflict with the current state of the resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests. The user has sent too many requests in a given amount of time",
             "content": {
               "application/json": {
                 "schema": {
@@ -362,38 +252,18 @@
                 }
               }
             }
-          },
-          "404": {
-            "description": "Not Found. The requested resource could not be found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Too Many Requests. The user has sent too many requests in a given amount of time",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
           }
         }
       }
     },
-    "/api/v3/public/customer/payment-link/get/{id}": {
+    "/payment-link/get/{id}": {
       "get": {
         "tags": [
           "Third-Party Payment Link Operations"
         ],
-        "summary": "Retrieve the payment links record by payment link id.",
-        "description": "This GET API is used to retrieve the payment links record by payment link id.",
-        "operationId": "getPaymentLinkRecord",
+        "summary": "Retrieve the payment link record by order ID.",
+        "description": "This GET API is used to retrieve the payment link record by the order ID.",
+        "operationId": "getPaymentLinkRecordByOrderId",
         "parameters": [
           {
             "name": "User-Agent",
@@ -406,6 +276,7 @@
           {
             "name": "id",
             "in": "path",
+            "description": "Order ID for retrieving the payment link record",
             "required": true,
             "schema": {
               "type": "string"
@@ -414,17 +285,7 @@
         ],
         "responses": {
           "400": {
-            "description": "Bad Request. Invalid or malformed payment link ID",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. You do not have permission to access this payment link record",
+            "description": "Bad Request. Invalid or malformed order ID",
             "content": {
               "application/json": {
                 "schema": {
@@ -453,8 +314,8 @@
               }
             }
           },
-          "409": {
-            "description": "Conflict. A conflict occurred while retrieving the payment link record",
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred while processing the request",
             "content": {
               "application/json": {
                 "schema": {
@@ -463,8 +324,18 @@
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error. An unexpected error occurred while processing the request",
+          "403": {
+            "description": "Forbidden. You do not have permission to access this payment link record",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found. No payment link record exists for the specified order ID",
             "content": {
               "application/json": {
                 "schema": {
@@ -483,8 +354,8 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found. No payment link record exists for the specified ID",
+          "409": {
+            "description": "Conflict. A conflict occurred while retrieving the payment link record",
             "content": {
               "application/json": {
                 "schema": {
@@ -496,14 +367,14 @@
         }
       }
     },
-    "/api/v3/public/customer/payment-link/delete/{id}": {
-      "delete": {
+    "/payment-link/get/{fromDate}/{toDate}": {
+      "get": {
         "tags": [
           "Third-Party Payment Link Operations"
         ],
-        "summary": "Soft delete a payment link record",
-        "description": "This DELETE API is used to process a soft delete of a payment link record from the database.",
-        "operationId": "deletePaymentLinkRecord",
+        "summary": "Retrieve the payment link records within the given date range.",
+        "description": "This GET API is used to retrieve payment link records based on the provided date range with pagination support.",
+        "operationId": "getPaymentLinkRecordInDateRange",
         "parameters": [
           {
             "name": "User-Agent",
@@ -514,28 +385,103 @@
             }
           },
           {
-            "name": "id",
+            "name": "fromDate",
             "in": "path",
+            "description": "Start date in format yyyy-MM-dd HH:mm:ss",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
+            },
+            "example": "2025-01-01 00:00:00"
+          },
+          {
+            "name": "toDate",
+            "in": "path",
+            "description": "End date in format yyyy-MM-dd HH:mm:ss",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "example": "2025-01-31 23:59:59"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination (default: 0)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Number of records per page (default: 10)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
             }
           }
         ],
-        "requestBody": {
-          "description": "Request payload for soft delete of a payment link record",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeletePaymentLinkRequest"
+        "responses": {
+          "400": {
+            "description": "Bad Request. Invalid or malformed date range",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
               }
             }
           },
-          "required": true
-        },
-        "responses": {
-          "400": {
-            "description": "Bad Request. Invalid payment link ID or input data",
+          "409": {
+            "description": "Conflict. A conflict occurred while retrieving the payment link records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found. No payment link records exist for the given date range",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests. The user has exceeded the allowed number of requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred while processing the request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK. Payment link records retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -545,7 +491,88 @@
             }
           },
           "403": {
-            "description": "Forbidden. You do not have permission to perform this action",
+            "description": "Forbidden. You do not have permission to access these payment link records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Access is denied due to invalid credentials or missing authentication token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions-history/get/{id}": {
+      "get": {
+        "tags": [
+          "Third-Party Transaction Details"
+        ],
+        "summary": "Retrieve a transaction by ID",
+        "description": "This GET API retrieves transaction details from the database based on the provided transaction ID.",
+        "operationId": "getTransactionById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Transaction ID for retrieving the transactions",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred while processing the request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Invalid or malformed transaction ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found. No transaction exists for the specified ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Access is denied due to invalid or missing authorization token",
             "content": {
               "application/json": {
                 "schema": {
@@ -565,7 +592,17 @@
             }
           },
           "409": {
-            "description": "Conflict. The payment link record could not be deleted due to a conflict with the current state",
+            "description": "Conflict. A conflict occurred while processing the request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. You do not have permission to access this transaction",
             "content": {
               "application/json": {
                 "schema": {
@@ -575,7 +612,91 @@
             }
           },
           "200": {
-            "description": "OK. Payment link record deleted successfully",
+            "description": "OK. Transaction details retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions-history/{fromDate}/{toDate}": {
+      "get": {
+        "tags": [
+          "Third-Party Transaction Details"
+        ],
+        "summary": "Retrieve the transactions records within the given date range.",
+        "description": "This GET API is used to retrieve transactions records based on the provided date range with pagination support.",
+        "operationId": "getUserTransactionHistory",
+        "parameters": [
+          {
+            "name": "Time-Zone",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromDate",
+            "in": "path",
+            "description": "Start date in format yyyy-MM-dd HH:mm:ss",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "example": "2025-01-01 00:00:00"
+          },
+          {
+            "name": "toDate",
+            "in": "path",
+            "description": "End date in format yyyy-MM-dd HH:mm:ss",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "example": "2025-01-31 23:59:59"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination (default: 0)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Number of records per page (default: 10)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred while processing the request",
             "content": {
               "application/json": {
                 "schema": {
@@ -584,8 +705,38 @@
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error. An unexpected error occurred while processing the request",
+          "400": {
+            "description": "Bad Request. Invalid or malformed date range",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found. No transactions records exist for the given date range",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict. A conflict occurred while retrieving the transactions records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests. The user has exceeded the allowed number of requests",
             "content": {
               "application/json": {
                 "schema": {
@@ -604,8 +755,129 @@
               }
             }
           },
+          "200": {
+            "description": "OK. Transactions records retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. You do not have permission to access these transactions records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+     "/business-details/{id}": {
+      "get": {
+        "tags": [
+          "Third-Party User Business Details"
+        ],
+        "summary": "Retrieve a business details by business id",
+        "description": "This GET API retrieves business details from the database based on the provided business ID.",
+        "operationId": "getBusinessDetailsByBusinessIdForAuth",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Business ID for retrieving the business details",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request. Invalid or malformed business ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. You do not have permission to access this transaction",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred while processing the request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK. Business details retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests. The user has exceeded the allowed number of requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
           "404": {
-            "description": "Not Found. The payment link record with the specified ID does not exist",
+            "description": "Not Found. No business exists for the specified ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict. A conflict occurred while processing the request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Access is denied due to invalid or missing authorization token",
             "content": {
               "application/json": {
                 "schema": {
@@ -620,9 +892,22 @@
   },
   "components": {
     "schemas": {
+      "CommonResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "response": {
+            "type": "object"
+          }
+        }
+      },
       "PaymentLinkPublicRequest": {
         "required": [
-          "apiKey",
           "customerName",
           "invoiceAmount",
           "isTermsAndConditionsAccepted",
@@ -630,9 +915,6 @@
         ],
         "type": "object",
         "properties": {
-          "apiKey": {
-            "type": "string"
-          },
           "customerName": {
             "type": "string"
           },
@@ -659,103 +941,12 @@
             "type": "boolean"
           }
         }
-      },
-      "CommonResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "response": {
-            "type": "object"
-          }
-        }
-      },
-      "RequestFilter": {
-        "type": "object",
-        "properties": {
-          "customerId": {
-            "minimum": 1,
-            "type": "integer",
-            "format": "int64"
-          },
-          "userId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "customerName": {
-            "type": "string"
-          },
-          "startDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "endDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "searchTerm": {
-            "type": "string"
-          },
-          "minAmount": {
-            "minimum": 0,
-            "type": "number",
-            "format": "double"
-          },
-          "maxAmount": {
-            "minimum": 1,
-            "type": "number",
-            "format": "double"
-          },
-          "pageNo": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "paymentLinkStatus": {
-            "type": "string"
-          },
-          "userEmail": {
-            "type": "string"
-          },
-          "userName": {
-            "type": "string"
-          },
-          "sortType": {
-            "type": "string"
-          },
-          "noOfDays": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "paginated": {
-            "type": "boolean"
-          }
-        }
-      },
-      "DeletePaymentLinkRequest": {
-        "required": [
-          "paymentLinkId"
-        ],
-        "type": "object",
-        "properties": {
-          "paymentLinkId": {
-            "minimum": 1,
-            "type": "integer",
-            "format": "int64"
-          },
-          "deleteComments": {
-            "type": "string"
-          }
-        }
       }
     },
     "securitySchemes": {
-      "Authorization": {
+      "apiKey": {
         "type": "apiKey",
-        "name": "Authorization",
+        "name": "apiKey",
         "in": "header"
       }
     }

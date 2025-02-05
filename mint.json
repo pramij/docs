@@ -57,13 +57,19 @@
         "api-reference/introduction"
       ]
     },
-    {
+  {
       "group": "Payments",
       "pages": [
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete",
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/get-by-filter"
+        {
+          "group": "Payment Links",
+          "pages": [
+            "api-reference/endpoint/create",
+            "api-reference/endpoint/delete",
+            "api-reference/endpoint/get",
+            "api-reference/endpoint/get-by-filter"
+            
+          ]
+        }
       ]
     },
     {

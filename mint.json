@@ -1,5 +1,4 @@
 {
-  "$schema": "https://mintlify.com/schema.json",
   "name": "Starter Kit",
   "logo": {
     "dark": "/logo/dark.svg",
@@ -78,8 +77,8 @@
         {
           "group": "Transaction Status",
           "pages": [
-            "api-reference/endpoint/transaction/get-transaction",
-            "api-reference/endpoint/transaction/transaction-by-id"
+            "api-reference/endpoint/Transaction/get-transaction",
+            "api-reference/endpoint/Transaction/transaction-by-id"
           ]
         }
       ]
@@ -90,12 +89,13 @@
         {
           "group": "Business Details",
           "pages": [
-            "api-reference/endpoint/business/get"
+            "api-reference/endpoint/Business/get"
           ]
         }
       ]
     }
   ],
+   "specs": "./api-reference/openapi.json",
   "footerSocials": {
     "x": "https://x.com/mintlify",
     "github": "https://github.com/mintlify",

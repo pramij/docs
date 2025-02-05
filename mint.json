@@ -50,12 +50,6 @@
         "essentials/reusable-snippets"
       ]
     },
-    {
-      "group": "API Documentation",
-      "pages": [
-        "api-reference/introduction"
-      ]
-    },
   {
       "group": "Payments",
       "pages": [

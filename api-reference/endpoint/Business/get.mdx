@@ -1,0 +1,28 @@
+---
+title: "Business Details"
+openapi: "GET /business-details/{id}"
+---
+
+# Retrieve Business Details by Business ID
+
+This endpoint retrieves **business details** from the database based on the provided business ID.
+
+## Path Parameters
+
+- **id** (string, required):  
+  The unique identifier of the business record to be retrieved.  
+  - Example: `1234567`  
+  - If a valid ID is provided, the API will return the business details.
+
+📌 **How it Works**  
+The system fetches business details for the given ID and returns relevant information. If no matching business exists, a `404 Not Found` response is returned.
+
+## Request Headers
+
+- **User-Agent** (string, optional): The User-Agent header, which is not mandatory.
+
+## Example Request
+
+```http
+GET /business/get-business-details/1234567
+User-Agent: Mozilla/5.0

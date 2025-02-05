@@ -80,6 +80,13 @@
         "api-reference/endpoint/create",
         "api-reference/endpoint/get"
       ]
+    },
+    {
+      "group": "Transactions",
+      "pages": [
+        "api-reference/endpoint/transaction/get-transaction",
+        "api-reference/endpoint/transaction/transaction-by-id"
+      ]
     }
   ],
   "footerSocials": {

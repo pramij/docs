@@ -1,12 +1,12 @@
 {
-  "name": "API docs",
+   "name": "API docs",
   "logo": {
-    "dark": "/images/hero-dark.svg",
-    "light": "/images/hero-light.svg"
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#222123",
+    "primary": "#0D9373",
     "light": "#07C983",
     "dark": "#0D9373",
     "anchors": {
@@ -17,18 +17,18 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@op.com"
+      "url": "mailto:hi@mintlify.com"
     }
   ],
   "tabs": [
     {
-      "name": "API Docs",
+       "name": "API Docs",
       "url": "documentation"
     }
   ],
   "navigation": [
     {
-      "group": "API Docs",
+       "group": "API Docs",
       "pages": [
         "introductions",
         "quickstart",
@@ -51,7 +51,7 @@
         }
       ]
     },
-    {
+   {
       "group": "Transactions",
       "pages": [
         {
@@ -63,7 +63,7 @@
         }
       ]
     },
-     {
+    {
       "group": "Business",
       "pages": [
         {

@@ -1,4 +1,31 @@
 ---
-title: 're-generate'
-openapi: 'POST /api/v3/public/customer/payment-link/re-generate'
+title: 'Generate Payment Link'
+openapi: 'POST /payment-link/generate'
 ---
+
+# Generate Payment Link
+
+This endpoint allows merchants to generate a payment link with customer-specific details such as name, amount, and notes.
+
+## Request Body
+
+- **customerName** (string, required): The name of the customer for whom the payment link is being created.
+- **invoiceNo** (string, optional): The invoice number, should be between 1 to 20 characters.
+- **invoiceAmount** (float, required): The amount for the payment, should be equal to or greater than 10.
+- **notes** (string, required): Any additional information or description for the payment.
+- **isTermsAndConditionsAccepted** (boolean, required): Whether the customer accepts the terms and conditions.
+- **currency** (string, optional): The currency for the payment, must be "AED".
+- **invoiceRequired** (boolean, optional): Whether an invoice is required.
+
+### Example Request
+
+```json
+{
+  "customerName": "John Doe",
+  "invoiceNo": "INV123456",
+  "invoiceAmount": 50.00,
+  "notes": "Payment for services rendered",
+  "isTermsAndConditionsAccepted": true,
+  "currency": "AED",
+  "invoiceRequired": true
+}

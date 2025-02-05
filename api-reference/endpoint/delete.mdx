@@ -1,4 +1,28 @@
 ---
-title: 'Delete Plant'
-openapi: 'DELETE /plants/{id}'
+title: 'Delete Payment Link'
+openapi: 'PUT /payment-link/delete/{id}'
 ---
+
+# Soft Delete Payment Link
+
+This endpoint allows merchants to perform a **soft delete** on a payment link record in the database. A soft delete means that the record is not permanently removed but is marked as inactive.
+
+## Path Parameters
+
+- **id** (string, required):  
+  The unique identifier (Order ID) of the payment link record to be deleted.  
+  - Example: `1234567890`  
+  - The API will update the status of the specified payment link record to indicate that it is deleted.
+
+📌 **How it Works**  
+If a valid `id` is provided, the API will update the record's status instead of permanently removing it. The record remains in the database but is no longer considered active.
+
+## Request Headers
+
+- **User-Agent** (string, optional): The User-Agent header, which is not mandatory.
+
+## Example Request
+
+```http
+PUT /payment-link/delete/1234567890
+User-Agent: Mozilla/5.0

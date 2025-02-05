@@ -1,5 +1,6 @@
 {
-   "name": "API docs",
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Starter Kit",
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
@@ -20,62 +21,67 @@
       "url": "mailto:hi@mintlify.com"
     }
   ],
+  "topbarCtaButton": {
+    "name": "Dashboard",
+    "url": "https://dashboard.mintlify.com"
+  },
   "tabs": [
     {
-       "name": "API Docs",
-      "url": "documentation"
+      "name": "API Reference",
+      "url": "api-reference"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Documentation",
+      "icon": "book-open-cover",
+      "url": "https://mintlify.com/docs"
+    },
+    {
+      "name": "Community",
+      "icon": "slack",
+      "url": "https://mintlify.com/community"
+    },
+    {
+      "name": "Blog",
+      "icon": "newspaper",
+      "url": "https://mintlify.com/blog"
     }
   ],
   "navigation": [
     {
-       "group": "API Docs",
+      "group": "Get Started",
       "pages": [
-        "introductions",
+        "introduction",
         "quickstart",
-        "authentication",
-         "references/metadata"
+        "development"
       ]
     },
     {
-      "group": "Payments",
+      "group": "Essentials",
       "pages": [
-        {
-          "group": "Payment Links",
-          "pages": [
-            "api-reference/endpoint/create",
-            "api-reference/endpoint/delete",
-            "api-reference/endpoint/get",
-            "api-reference/endpoint/get-by-filter"
-            
-          ]
-        }
-      ]
-    },
-   {
-      "group": "Transactions",
-      "pages": [
-        {
-          "group": "Transaction Status",
-          "pages": [
-            "api-reference/endpoint/transaction/get-transaction",
-            "api-reference/endpoint/transaction/transaction-by-id"
-          ]
-        }
+        "essentials/markdown",
+        "essentials/code",
+        "essentials/images",
+        "essentials/settings",
+        "essentials/navigation",
+        "essentials/reusable-snippets"
       ]
     },
     {
-      "group": "Business",
+      "group": "API Documentation",
       "pages": [
-        {
-          "group": "Business Details",
-          "pages": [
-            "api-reference/endpoint/business/get"
-          ]
-        }
+        "api-reference/introduction"
+      ]
+    },
+    {
+      "group": "Endpoint Examples",
+      "pages": [
+        "api-reference/endpoint/create",
+        "api-reference/endpoint/get"
       ]
     }
   ],
-  "specs": "./api-reference/openapi.json",
   "footerSocials": {
     "x": "https://x.com/mintlify",
     "github": "https://github.com/mintlify",

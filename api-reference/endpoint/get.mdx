@@ -1,4 +1,22 @@
 ---
-title: 'Get Payment-link by id'
-openapi: 'GET /api/v3/public/customer/payment-link/get/{id}'
+title: 'Retrieve Payment Link'
+openapi: 'GET /payment-link/get/{id}'
 ---
+
+# Retrieve Payment Link
+
+This endpoint retrieves the payment link record associated with the given order ID.
+
+## Path Parameters
+
+- **orderId** (string, required): The unique identifier for retrieves the payment link record.
+
+## Request Headers
+
+- **User-Agent** (string, optional): The User-Agent header, which is not mandatory.
+
+## Example Request
+
+```http
+GET /payment-link/get/12345
+User-Agent: Mozilla/5.0

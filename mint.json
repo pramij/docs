@@ -30,14 +30,30 @@
       "url": "api-reference"
     }
   ],
- "navigation": [
+  "navigation": [
     {
-      "group": "API Docs",
+      "group": "Get Started",
       "pages": [
-        "introductions",
+        "introduction",
         "quickstart",
-        "authentication",
-         "references/metadata"
+        "development"
+      ]
+    },
+    {
+      "group": "Essentials",
+      "pages": [
+        "essentials/markdown",
+        "essentials/code",
+        "essentials/images",
+        "essentials/settings",
+        "essentials/navigation",
+        "essentials/reusable-snippets"
+      ]
+    },
+    {
+      "group": "API Documentation",
+      "pages": [
+        "api-reference/introduction"
       ]
     },
   {

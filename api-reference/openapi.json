@@ -518,14 +518,14 @@
         "tags": [
           "Third-Party Transaction Details"
         ],
-        "summary": "Retrieve a transaction by ID",
-        "description": "This GET API retrieves transaction details from the database based on the provided transaction ID.",
+        "summary": "Retrieve a transaction by order ID",
+        "description": "This GET API retrieves transaction details from the database based on the provided order ID.",
         "operationId": "getTransactionById",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "Transaction ID for retrieving the transactions",
+            "description": "Order ID for retrieving the transactions",
             "required": true,
             "schema": {
               "type": "string"
@@ -552,7 +552,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Invalid or malformed transaction ID",
+            "description": "Bad Request. Invalid or malformed order ID",
             "content": {
               "application/json": {
                 "schema": {

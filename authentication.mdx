@@ -8,6 +8,10 @@ icon: 'lock'
 
 To get authenticated and start making API calls, you'll first need to retrieve your **API key** from the Omnispay dashboard.
 
+#### Prerequisite: Generate an API Key
+
+Before making API requests, the merchant must generate an API key by sending a request to the API. The response will contain the API key details, which should be used to authenticate subsequent requests.
+
 #### Step 1: Retrieve your API Key
 
 To obtain your API key:
@@ -22,23 +26,11 @@ To obtain your API key:
 Before making any request, the client must include an API key in the request header. Upon receiving the request, the backend will perform the following:
 
 1. **Check the API Key**:
-   - The backend will first check if the request contains a valid API key in the header.
+   - First check if the request contains a valid API key in the header.
+   - Verify whether the API key has the proper access to the requested endpoints.
+   - Check if the request originates from an IP address that has been granted permission for that API key.
+   - If all these validations pass, the user can access the requested resources.
+   - If the URL or IP does not have the necessary permissions, the user can update their allowed endpoints and IP addresses against the API key.
    - If the API key is missing, the request will be rejected with a proper error message.
 
-2. **Create an APIKeyRequest Object**:
-   The backend will create an `ApiKeyRequest` object with the following details extracted from the request:
-   
-   ```java
-   public class ApiKeyRequest {
-       @NotBlank(message = "Please enter apiKey.")
-       private String apiKey;
-
-       @NotBlank(message = "ipAddress cannot be blank")
-       private String ipAddress;
-
-       @NotBlank(message = "url cannot be blank")
-       private String url;
-
-       @NotBlank(message = "http method cannot be blank")
-       private String httpMethod;
-   }
+3. 

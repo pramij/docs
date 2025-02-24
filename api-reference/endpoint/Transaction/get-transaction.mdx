@@ -2,3 +2,39 @@
 title: 'List All Transactions'
 openapi: 'GET /transactions-history/{fromDate}/{toDate}'
 ---
+
+# Retrieve Transactions by Date Range
+
+This endpoint fetches transaction records within a given date range, with pagination support.
+
+## Path Parameters
+
+- **fromDate** (string, required):  
+  The starting date (inclusive) for the date range filter.  
+  Format: `yyyy-MM-dd HH:mm:ss`  
+  - Example: `2025-01-01 00:00:00`  
+  - The API will retrieve all transaction records created **on or after this date**.
+
+- **toDate** (string, required):  
+  The ending date (inclusive) for the date range filter.  
+  Format: `yyyy-MM-dd HH:mm:ss`  
+  - Example: `2025-01-31 23:59:59`  
+  - The API will retrieve all transaction records created **on or before this date**.
+
+📌 **How it Works**  
+If you specify a **fromDate** of `2025-01-01 00:00:00` and a **toDate** of `2025-01-31 23:59:59`, the API will return all transaction records that were created within this date range. The results will be paginated based on the provided query parameters.
+
+## Query Parameters
+
+- **page** (integer, optional, default: 0): The page number to fetch.
+- **size** (integer, optional, default: 10): The number of records per page.
+
+## Request Headers
+
+- **User-Agent** (string, optional): The User-Agent header, which is not mandatory.
+
+## Example Request
+
+```http
+GET /transactions-history/2025-01-01%2000:00:00/2025-01-31%2023:59:59?page=1&size=20
+User-Agent: Mozilla/5.0

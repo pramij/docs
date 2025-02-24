@@ -1,0 +1,28 @@
+---
+title: "Retrieve Payout Summary"
+openapi: "GET /get-payout-summary/{id}"
+---
+
+# Retrieve Payout Summary by Order Id.
+
+This endpoint retrieves **payout summary** from the database based on the provided order ID.
+
+## Path Parameters
+
+- **id** (string, required):  
+  The unique identifier of the payout summary record to be retrieved.  
+  - Example: `123457`  
+  - If a valid ID is provided, the API will return the payout summary.
+
+📌 **How it Works**  
+The system fetches payout summary for the given ID and returns payout summary.
+
+## Request Headers
+
+- **User-Agent** (string, optional): The User-Agent header, which is not mandatory.
+
+## Example Request
+
+```http
+GET /get-payout-summary/123457
+User-Agent: Mozilla/5.0

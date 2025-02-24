@@ -30,7 +30,7 @@
     "/payment-link/delete/{id}": {
       "put": {
         "tags": [
-          "Third-Party Payment Link Operations"
+          "Public API for Payment Link Operations"
         ],
         "summary": "Soft delete a payment link record",
         "description": "This DELETE API is used to process a soft delete of a payment link record from the database.",
@@ -141,7 +141,7 @@
     "/payment-link/generate": {
       "post": {
         "tags": [
-          "Third-Party Payment Link Operations"
+          "Public API for Payment Link Operations"
         ],
         "summary": "Generate Payment Link",
         "description": "Generate payment link for the user based on the provided request parameters.",
@@ -262,7 +262,7 @@
     "/payment-link/get/{id}": {
       "get": {
         "tags": [
-          "Third-Party Payment Link Operations"
+          "Public API for Payment Link Operations"
         ],
         "summary": "Retrieve the payment link record by order ID.",
         "description": "This GET API is used to retrieve the payment link record by the order ID.",
@@ -373,7 +373,7 @@
     "/payment-link/get/{fromDate}/{toDate}": {
       "get": {
         "tags": [
-          "Third-Party Payment Link Operations"
+          "Public API for Payment Link Operations"
         ],
         "summary": "Retrieve the payment link records within the given date range.",
         "description": "This GET API is used to retrieve payment link records based on the provided date range with pagination support.",
@@ -516,10 +516,267 @@
         }
       }
     },
+    "/get-payout-summary/{id}": {
+      "get": {
+        "tags": [
+          "Public API for Payment Link Operations"
+        ],
+        "summary": "Retrieve payout summary by order ID",
+        "description": "This API fetches the payout summary report associated with the given order ID.",
+        "operationId": "getUserPayoutSummaryReportsByOrderId",
+        "parameters": [
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Order ID for retrieving the payout summary report",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request. Invalid or malformed order ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Access denied due to invalid credentials or missing authentication token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK. Payout summary retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found. No payout summary exists for the specified order ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests. The user has exceeded the allowed number of requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred while processing the request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. You do not have permission to access this resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict. A conflict occurred while retrieving the payout summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+     "/get-payout-summary/{fromDate}/{toDate}": {
+      "get": {
+        "tags": [
+          "Public API for Payment Link Operations"
+        ],
+        "summary": "Retrieve payout summary reports within the given date range",
+        "description": "Fetches payout summary reports between the provided fromDate and toDate with pagination support.",
+        "operationId": "getUserPayoutSummeryReportsInDateRange",
+        "parameters": [
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromDate",
+            "in": "path",
+            "description": "Start date in format yyyy-MM-dd HH:mm:ss",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "example": "2025-01-01 00:00:00"
+          },
+          {
+            "name": "toDate",
+            "in": "path",
+            "description": "End date in format yyyy-MM-dd HH:mm:ss",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "example": "2025-01-31 23:59:59"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination (default: 0)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Number of records per page (default: 10)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request. Invalid or malformed date range",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Access denied due to invalid credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict. A conflict occurred while retrieving the payout summary records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests. The user has exceeded the allowed number of requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred while processing the request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. You do not have permission to access this resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK. Payout summary records retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found. No payout summary records exist for the given date range",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/transactions-history/get/{id}": {
       "get": {
         "tags": [
-          "Third-Party Transaction Details"
+          "Public API for Transaction Details"
         ],
         "summary": "Retrieve a transaction by order ID",
         "description": "This GET API retrieves transaction details from the database based on the provided order ID.",
@@ -630,7 +887,7 @@
     "/transactions-history/{fromDate}/{toDate}": {
       "get": {
         "tags": [
-          "Third-Party Transaction Details"
+          "Public API for Transaction Details"
         ],
         "summary": "Retrieve the transactions records within the given date range.",
         "description": "This GET API is used to retrieve transactions records based on the provided date range with pagination support.",
@@ -781,24 +1038,15 @@
         }
       }
     },
-     "/business-details/{id}": {
+     "/business-details": {
       "get": {
         "tags": [
-          "Third-Party User Business Details"
+          "Public API for User Business Details"
         ],
-        "summary": "Retrieve a business details by business id",
-        "description": "This GET API retrieves business details from the database based on the provided business ID.",
-        "operationId": "getBusinessDetailsByBusinessIdForAuth",
+        "summary": "Retrieve a business details by api key",
+        "description": "This GET API retrieves business details from the database based on the provided API key.",
+        "operationId": "getBusinessDetails",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Business ID for retrieving the business details",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "name": "User-Agent",
             "in": "header",
@@ -809,8 +1057,8 @@
           }
         ],
         "responses": {
-          "400": {
-            "description": "Bad Request. Invalid or malformed business ID",
+          "404": {
+            "description": "Not Found. No business exists for the specified ID",
             "content": {
               "application/json": {
                 "schema": {
@@ -829,8 +1077,8 @@
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error. An unexpected error occurred while processing the request",
+          "400": {
+            "description": "Bad Request. Invalid or malformed api key",
             "content": {
               "application/json": {
                 "schema": {
@@ -849,6 +1097,16 @@
               }
             }
           },
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred while processing the request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResponse"
+                }
+              }
+            }
+          },
           "429": {
             "description": "Too Many Requests. The user has exceeded the allowed number of requests",
             "content": {
@@ -859,8 +1117,8 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found. No business exists for the specified ID",
+          "401": {
+            "description": "Unauthorized. Access is denied due to invalid or missing authorization token",
             "content": {
               "application/json": {
                 "schema": {
@@ -871,16 +1129,6 @@
           },
           "409": {
             "description": "Conflict. A conflict occurred while processing the request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommonResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Access is denied due to invalid or missing authorization token",
             "content": {
               "application/json": {
                 "schema": {

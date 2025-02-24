@@ -72,6 +72,18 @@
           ]
         }
       ]
+    },
+     {
+      "group": "Payout",
+      "pages": [
+        {
+          "group": "Payout Summary",
+          "pages": [
+            "api-reference/endpoint/payout/get",
+             "api-reference/endpoint/payout/get-all-payouts"
+          ]
+        }
+      ]
     }
   ],
    "specs": "./api-reference/openapi.json",

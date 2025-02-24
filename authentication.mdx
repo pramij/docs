@@ -5,6 +5,35 @@ icon: 'lock'
 
 ---
 
+---
+title: 'Authentication'
+description: 'Preview changes locally to update your docs'
+icon: 'lock'
+---
+
+### Authentication with Mamo
+
+To get authenticated and start making API calls, you'll first need to retrieve your **API key** from the Mamo dashboard.
+
+#### Step 1: Retrieve your API Key
+
+To obtain your API key:
+
+1. **Log in** to your Mamo dashboard.
+2. Navigate to the **Developer Page**.
+3. **Copy your API Key** from the page.
+
+Alternatively, you can follow this direct link to access your API key: [Get Your API Key](https://business.mamopay.com/manage_api/v1/me).
+
+#### Step 2: Test Authentication
+
+Once you have your API key, use the following cURL command to test authentication:
+
+```bash
+curl --location 'https://business.mamopay.com/manage_api/v1/me' \
+  --header 'Authorization: Bearer <your_api_key>'
+
+
 <Info>
   **Prerequisite**: Please install Node.js (version 19 or higher) before proceeding.
 </Info>

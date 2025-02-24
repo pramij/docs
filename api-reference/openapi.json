@@ -773,7 +773,7 @@
         }
       }
     },
-    "/transactions-history/get/{id}": {
+    "/transactions-history/{id}": {
       "get": {
         "tags": [
           "Public API for Transaction Details"

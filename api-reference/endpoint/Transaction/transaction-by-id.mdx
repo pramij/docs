@@ -1,11 +1,11 @@
 ---
 title: "Retrieve Transaction Status"
-openapi: "GET /transactions-history/get/{id}"
+openapi: "GET /transactions-history/{id}"
 ---
 
 # Retrieve Transaction by ID
 
-This endpoint retrieves **transaction details** from the database based on the provided transaction ID.
+This endpoint retrieves **transaction details** from the database based on the provided order ID.
 
 ## Path Parameters
 
@@ -24,5 +24,5 @@ The system fetches transaction data for the given ID and returns transaction det
 ## Example Request
 
 ```http
-GET /transaction/get/123457
+GET /transaction/123457
 User-Agent: Mozilla/5.0

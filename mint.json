@@ -32,7 +32,10 @@
       "pages": [
         "introduction",
         "quickstart",
-        "authentication"
+        "authentication",
+        "references/metadata",
+        "references/webhook",
+        "references/sandbox"
       ]
     },
   {

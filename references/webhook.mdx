@@ -1,6 +1,152 @@
 ---
 title: Webhook
-description: Error codes, metadata, status
+description: Webhook Documentation
 icon: 'books'
 ---
+
+# Introduction
+
+Webhook provides a server-to-server messaging system that facilitates communication regarding various transaction types and agreement-related changes. The service enables your systems to receive notifications about important events such as refunds, voids, or agreement modifications.
+
+You have the flexibility to choose the specific transaction types or agreement actions you want to receive messages for. Once selected, the webhook service will deliver relevant information for those actions. These events may include:
+
+- Transactions processed through payment processing APIs like Hosted Payment Pages or Remote.
+- Manually processed transactions through the Merchant Administration System.
+- Agreement-related changes made via the system or API.
+
+Each message is transmitted as an HTTP POST request to a pre-configured URL.
+
+## Service Configuration
+
+To configure webhook notifications, navigate to the **Merchant Administration System** and select either the **‘Payment Page’** or **‘Security’** menu, then click on the **‘Transaction Advice’** option.
+
+This will display the configuration page, where you can specify the transaction types or agreement actions for which you want to receive notifications. You can also choose to receive messages **only for transactions that have been authorised** (transaction status `A` or `H`).
+
+> 📘 **Note:**  
+> If the "Only include authorised transactions (status 'A' or 'H')" option is not selected, then declined transaction data will also be sent along with authorised entries.
+
+You will need to supply the URL that is to be used by the advice service. This URL must use either the **HTTP or HTTPS** protocol and must be on either port **80 or 443**. The connection is a direct server-to-server connection with no browser involvement, so the URL must be accessible over the internet.
+
+## Message Format
+
+### Transaction-Related Webhooks
+
+Transaction-related webhooks are sent using the **HTTP POST** method and contain the following fields:
+
+| Field          | Description |
+|---------------|-------------|
+| `tran_store`  | Your store ID |
+| `tran_type`   | Transaction type (see list below) |
+| `tran_class`  | Transaction class |
+| `tran_test`   | Test mode (`0` = Live transaction, `1` = Test) |
+| `tran_ref`    | Transaction reference |
+| `tran_prevref` | Reference for previous transaction (for follow-up transactions like voids) |
+| `tran_firstref` | Reference for the first transaction in a sequence |
+| `tran_order`  | Order reference (only sent upon request) |
+| `tran_currency` | Transaction currency (ISO 3-character code) |
+| `tran_amount`  | Transaction amount |
+| `tran_cartid`  | Cart ID |
+| `tran_desc`   | Purchase description |
+| `tran_status` | Transaction status (`A` or `H` for authorised, others indicate failure) |
+| `tran_authcode` | Authorisation code (or error code if not authorised) |
+| `tran_authmessage` | Authorisation message |
+| `tran_check`  | Data signature check (see security section) |
+| `card_code`   | Card identifier (two-digit code) |
+| `card_payment` | Type of payment used |
+| `bin_number`  | Card Bank Identification Number (BIN) |
+| `card_issuer` | Name of the bank that issued the card |
+| `card_country` | Card country (two-letter ISO code) |
+| `card_last4`  | Last four digits of the card number |
+| `cart_lang`   | Language code used for checkout |
+| `integration_id` | Integration setup identifier |
+| `actual_payment_date` | Date and time of the payment |
+| `bill_title`  | Title (Mr, Mrs, etc.) |
+| `bill_fname`  | First name |
+| `bill_sname`  | Surname |
+| `bill_addr1`  | Address line 1 |
+| `bill_addr2`  | Address line 2 |
+| `bill_addr3`  | Address line 3 |
+| `bill_city`   | City |
+| `bill_region` | Region/State |
+| `bill_country` | Country (two-character ISO code) |
+| `bill_zip`    | Zip/Postcode |
+| `bill_phone1` | Phone number |
+| `bill_email`  | Email address |
+| `xtra_*`      | Extra data fields from authorisation |
+
+### Transaction Types
+
+| Type  | Details |
+|-------|---------|
+| `Sale` | Standard online transaction where funds are debited immediately. |
+| `Void` | Cancels a sale transaction within a short time after processing. |
+| `Refund` | Credits an amount back to the customer (same or less than original). |
+| `Refund Reversal` | Cancels a refund (only supported by some acquirers). |
+| `Auth` | Pre-authorisation transaction, reserving funds until a capture is made. |
+| `Capture` | Debits reserved funds from an `Auth` transaction. |
+| `Capture Reversal` | Cancels a capture transaction within a short time after processing. |
+
+> 📘 **Note:**  
+> Some transactions may be converted from `Sale` to `Auth` if flagged for review.
+
+### Card Codes
+
+| Code | Card Type |
+|------|-----------|
+| `VC` | Visa Credit |
+| `VD` | Visa Debit |
+| `VE` | Visa Electron |
+| `MC` | Mastercard Credit |
+| `MD` | Mastercard Debit |
+| `AM` | American Express |
+| `PP` | PayPal |
+| `UP` | Union Pay |
+| ...  | *(More card types available upon request)* |
+
+## Agreement-Related Webhooks
+
+These webhooks notify you of agreement-related events. The request contains the following fields:
+
+| Field | Description |
+|--------|-------------|
+| `type` | Agreement Type |
+| `agreement_id` | Unique agreement identifier |
+| `action` | Action performed on the agreement |
+| `store_id` | Store ID |
+| `change_by` | Who updated the action |
+| `timestamp` | Timestamp of the action |
+| `email_id` | Customer Email |
+| `due_date` | Next payment date (for recurring agreements) |
+| `cancellation_reason` | Reason for cancellation |
+
+### Agreement Actions
+
+| Action | Required Fields |
+|--------|----------------|
+| `CHANGE_DATE` | `due_date`, `email_id` |
+| `FREEZE` | `freeze_start_date`, `freeze_end_date` |
+| `STORE_TRANSFER` | `new_store_id`, `email_id` |
+| `CANCEL` | `cancellation_reason`, `email_id` |
+
+## Message Delivery
+
+Webhook messages are sent immediately after transaction processing or agreement actions. If delivery fails:
+
+1. A retry will be attempted after a short delay.
+2. Up to **4 retries** will be made, with increasing delay intervals.
+3. The receiving system **must respond with HTTP 200 OK** for successful receipt.
+
+## Data Security
+
+To authenticate webhook messages, a **SHA1 hash check** is used with key transaction, card, billing, or agreement fields.
+
+### Hashing Process
+
+1. Concatenate field values using `:` as a separator.
+2. Convert percent-encoded characters (e.g., `%20`) to their original characters.
+3. Generate a **SHA1 hash** of the string.
+4. Compare with the received hash value.
+
+
+
 

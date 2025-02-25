@@ -1,6 +1,48 @@
 ---
 title: Sandbox
-description: Error codes, metadata, status
-icon: 'books'
+description:Test the API in a safe environment before going live
+icon: 'experiment'
 ---
+
+# Sandbox Environment  
+
+Omnispay provides a **sandbox environment** to allow developers to test APIs without performing real transactions. The sandbox mimics the production environment, enabling you to integrate and validate your implementation before going live.  
+
+---
+
+## Why Use the Sandbox?  
+
+- **Safe Testing:** Test API calls without affecting real users or funds.  
+- **Realistic Simulations:** Simulates responses similar to the production environment.  
+- **Free of Cost:** No actual transactions occur, so you won’t be charged.  
+- **Debugging & Validation:** Identify issues before deployment.  
+
+---
+
+## How to Access the Sandbox  
+
+To start testing in the **sandbox environment**, you need to generate an **API Key**.  
+
+### **Step 1: Get Your Sandbox API Key**  
+
+1. **Log in** to your Omnispay developer dashboard.  
+2. Navigate to the **Sandbox API Keys** section.  
+3. Click on **Generate API Key**.  
+4. Copy the API key for testing purposes.  
+
+> ⚠️ **Note:** The sandbox API key is different from the production API key. Ensure that you replace it with a live API key when moving to production.  
+
+---
+
+## Authentication in Sandbox  
+
+All sandbox API requests must include the API key in the request header.  
+
+### **Sandbox API Request Example**  
+
+```bash
+
+curl --location 'https://demo.omnispay.com/business-details' \
+--header 'apiKey: op_test_QmEB3OK3rjTZS1SFosqHy4MUFABjsXUxANWWh198y5uv'
+
 

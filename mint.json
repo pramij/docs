@@ -34,8 +34,9 @@
         "quickstart",
         "authentication",
         "references/metadata",
+        "references/testcards",
         "references/webhook",
-        "references/sandbox"
+        "references/sandbox"     
       ]
     },
   {

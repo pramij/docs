@@ -6,24 +6,27 @@ icon: 'credit-card'
 
 These card numbers can be used when testing your integration to the payment gateway. These cards will not work for live transactions.
 
-The card security code (CVV) to use with the test cards is 123 (except for American Express, which should be 1234) for an authorised response, other codes will be declined.
+The card security code (CVV) to use with the test cards is **123** (except for American Express, which should be **1234**) for an authorised response, other codes will be declined.
 
-Cards which show ‘Yes’ in the 3DS column will use a simulated 3D Secure authentication page, allowing you to test the transaction flow when Verified by Visa or MasterCard SecureCode is used.
+Cards which show **‘Yes’** in the **3DS** column will use a simulated 3D Secure authentication page, allowing you to test the transaction flow when Verified by Visa or MasterCard SecureCode is used.
 
-| Card number          | Type  | CVV | 3DS |
-|----------------------|------|-----|-----|
-| 4000 0000 0000 0002 | Visa | 123 | No  |
-| 4111 1111 1111 1111 | Visa | 123 | Yes |
-| 4444 3333 2222 1111 | Visa | 123 | Yes |
-| 4444 4244 4444 4440 | Visa | 123 | Yes |
-| 4444 4444 4444 4448 | Visa | 123 | Yes |
+### **Test Card Details**
 
-### Simulating Hosted Payment Page Decline/Error Responses
+| **Card Number**        | **Type** | **CVV** | **3DS** |
+|------------------------|---------|--------|--------|
+| `4000 0000 0000 0002` | **Visa** | `123`  | **No**  |
+| `4111 1111 1111 1111` | **Visa** | `123`  | **Yes** |
+| `4444 3333 2222 1111` | **Visa** | `123`  | **Yes** |
+| `4444 4244 4444 4440` | **Visa** | `123`  | **Yes** |
+| `4444 4444 4444 4448` | **Visa** | `123`  | **Yes** |
 
-When in test mode, and when using the above test cards, you can simulate any of the transaction response codes by using specific values for the card security code (CVV). By taking the response code you want to simulate, pad that code with a leading ‘0’ in order to make it a 3-digit code and use that for the CVV.
+### **Simulating Hosted Payment Page Decline/Error Responses**
 
-For example, to simulate the Insufficient Funds response (status ‘D’, code ‘41’) use 041 as the CVV.
+When in test mode, and when using the above test cards, you can simulate any of the transaction response codes by using specific values for the card security code (**CVV**). By taking the response code you want to simulate, pad that code with a leading **‘0’** in order to make it a **3-digit code** and use that for the **CVV**.
 
-You can also simulate an on-hold transaction in the same way. On hold is where the transaction has been authorised, but the anti-fraud system has flagged the transaction for inspection. Whilst the transaction is on-hold, no funds will be debited from the customers’ card. You would need to use the Merchant Administration System to either accept or reject the transaction. To simulate the on-hold response within the test system, use a CVV value of ‘999’ with one of the above test cards.
+For example, to simulate the **Insufficient Funds** response (status ‘D’, code ‘41’) use **041** as the CVV.
+
+You can also simulate an **on-hold transaction** in the same way. On hold is where the transaction has been authorised, but the anti-fraud system has flagged the transaction for inspection. Whilst the transaction is on-hold, no funds will be debited from the customers’ card. You would need to use the **Merchant Administration System** to either accept or reject the transaction. To simulate the **on-hold response** within the test system, use a **CVV** value of **‘999’** with one of the above test cards.
+
 
 

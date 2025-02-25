@@ -1,57 +1,73 @@
 ---
 title: Metadata
-description: Response codes, Test cards, Currency
+description: Response codes, Card Types, Currency
 icon: 'book'
 ---
 
 ## Custom Response Codes
 
-| Code | Message |
-|------|--------------------------------|
-| 00   | SUCCESS |
-| 90   | Blocked user |
-| 91   | Empty Request Body |
-| 92   | Bad Request |
-| 93   | Data not found |
-| 96   | Not Acceptable |
-| 97   | Payment Gateway Failure |
-| 99   | Unable to process the request. |
+| Code  | Message                                |
+|-------|----------------------------------------|
+| 00    | SUCCESS                                |
+| 90    | Blocked user                           |
+| 91    | Empty Request Body                     |
+| 92    | Bad Request                            |
+| 93    | Data not found                         |
+| 96    | Not Acceptable                         |
+| 97    | Payment Gateway Failure                |
+| 99    | Unable to process the request.         |
 
 ## Transaction Limits
 
-| Code | Message |
-|------|--------------------------------|
-| 90   | Account Blocked |
-| 99   | Monthly transaction limit exceeded |
-| 99   | Per transaction limit exceeded |
+| Code  | Message                                |
+|-------|----------------------------------------|
+| 90    | Account Blocked                        |
+| 99    | Monthly transaction limit exceeded    |
+| 99    | Per transaction limit exceeded        |
 
 ## Standard HTTP Response Codes
 
-| Code | Message |
-|------|--------------------------------|
-| 200  | OK |
-| 201  | Created |
-| 204  | No Content |
-| 400  | Bad Request |
-| 401  | Unauthorized |
-| 403  | Forbidden |
-| 404  | Not Found |
-| 405  | Method Not Allowed |
-| 409  | Conflict |
-| 415  | Unsupported Media Type |
-| 422  | Unprocessable Entity |
-| 500  | Internal Server Error |
-| 502  | Bad Gateway |
-| 503  | Service Unavailable |
+| Code  | Message                                |
+|-------|----------------------------------------|
+| 200   | OK                                     |
+| 201   | Created                                |
+| 204   | No Content                             |
+| 400   | Bad Request                            |
+| 401   | Unauthorized                           |
+| 403   | Forbidden                              |
+| 404   | Not Found                              |
+| 405   | Method Not Allowed                     |
+| 409   | Conflict                               |
+| 415   | Unsupported Media Type                 |
+| 422   | Unprocessable Entity                   |
+| 500   | Internal Server Error                  |
+| 502   | Bad Gateway                            |
+| 503   | Service Unavailable                    |
+
+
+## Card Types
+
+| **Type**          | **Description**                 |
+|-------------------|--------------------------------|
+| **Visa**         | Popular global payment card    |
+| **MasterCard**   | Widely accepted credit card    |
+| **American Express** | Premium credit card service  |
+| **Discover**     | U.S.-based payment network     |
+| **JCB**          | Japanese payment card          |
+| **Diners Club**  | Travel-focused credit card     |
 
 
 
 ## Supported Currency
 
+**icon: 'currency'**
 
 The available currency codes on your account are determined by the merchant accounts you have with your acquiring bank. You can only process transactions in those currencies. Submitting a transaction request in a currency that is not available on your account will result in the request being rejected.
 
-| Code | Description |
-|------|--------------------------------|
-| AED  | United Arab Emirates Dirham |
+### **Available Currencies**
+
+| **Code** | **Description**                        |
+|---------|--------------------------------------|
+| **AED** | United Arab Emirates Dirham         |
+
 

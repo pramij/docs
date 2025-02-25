@@ -1,10 +1,10 @@
 ---
 title: Metadata
-description: Error codes, Response codes, Test cards, Currency
+description: Response codes, Test cards, Currency
 icon: 'books'
 ---
 
-## Custom Error Codes
+## Custom Response Codes
 
 | Code | Message |
 |------|--------------------------------|
@@ -43,4 +43,24 @@ icon: 'books'
 | 500  | Internal Server Error |
 | 502  | Bad Gateway |
 | 503  | Service Unavailable |
+
+## Test Cards
+
+These card numbers can be used when testing your integration to the payment gateway. These cards will not work for live transactions.
+
+The card security code (CVV) to use with the test cards is 123 (except for American Express, which should be 1234) for an authorised response, other codes will be declined.
+
+Cards which show ‘Yes’ in the 3DS column will use a simulated 3D Secure authentication page, allowing you to test the transaction flow when Verified by Visa or MasterCard SecureCode is used.
+
+| Card number          | Type  | CVV | 3DS |
+|----------------------|------|-----|-----|
+| 4000 0000 0000 0002 | Visa | 123 | No  |
+| 4111 1111 1111 1111 | Visa | 123 | Yes |
+| 4444 3333 2222 1111 | Visa | 123 | Yes |
+| 4444 4244 4444 4440 | Visa | 123 | Yes |
+| 4444 4444 4444 4448 | Visa | 123 | Yes |
+
+## Supported Currency
+
+Only AED is supported.
 

@@ -22,10 +22,6 @@
   ],
   "tabs": [
     {
-      "name": "API Docs",
-      "url": "documentation"
-    },
-    {
       "name": "Documentation",
       "url": "documentation"
     },
@@ -40,18 +36,18 @@
   ],
   "navigation": [
     {
-      "group": "API Docs",
+      "group": "Documentation",
       "pages": [
-        "introduction",
-        "quickstart",
-        "authentication",
-        "references/metadata",
-        "references/testcards",
-        "references/webhook",
-        "references/sandbox"     
+        "documentation/introduction",
+        "documentation/quickstart",
+        "documentation/authentication",
+        "documentation/references/metadata",
+        "documentation/references/testcards",
+        "documentation/references/webhook",
+        "documentation/references/sandbox"
       ]
     },
-  {
+    {
       "group": "Payments",
       "pages": [
         {
@@ -61,7 +57,6 @@
             "api-reference/endpoint/delete",
             "api-reference/endpoint/get",
             "api-reference/endpoint/get-by-filter"
-            
           ]
         }
       ]
@@ -72,37 +67,43 @@
         {
           "group": "Transaction Status",
           "pages": [
-            "api-reference/endpoint/Transaction/get-transaction",
-            "api-reference/endpoint/Transaction/transaction-by-id"
+            "api-reference/endpoint/transaction/get-transaction",
+            "api-reference/endpoint/transaction/transaction-by-id"
           ]
         }
       ]
     },
-      {
+    {
       "group": "Business",
       "pages": [
         {
           "group": "Business Details",
           "pages": [
-            "api-reference/endpoint/Business/get"
+            "api-reference/endpoint/business/get"
           ]
         }
       ]
     },
-     {
+    {
       "group": "Payout",
       "pages": [
         {
           "group": "Payout Summary",
           "pages": [
             "api-reference/endpoint/payout/get",
-             "api-reference/endpoint/payout/get-all-payouts"
+            "api-reference/endpoint/payout/get-all-payouts"
           ]
         }
       ]
+    },
+    {
+      "group": "Changelog",
+      "pages": [
+        "changelog/changelog"
+      ]
     }
   ],
-   "specs": "./api-reference/openapi.json",
+  "specs": "./api-reference/openapi.json",
   "footerSocials": {
     "x": "https://x.com/mintlify",
     "github": "https://github.com/mintlify",

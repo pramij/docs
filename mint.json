@@ -14,73 +14,95 @@
             "to": "#07C983"
         }
     },
-    "navigation": {
-    "tabs": [
-      {
-        "tab": "Guides",
-        "groups": [
-          {
-            "group": "Get Started",
-            "pages": [
-              "index",
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Essentials",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API Reference",
-        "groups": [
-          {
-            "group": "API Documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint Examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
-            ]
-          }
-        ]
-      }
-    ],
-    "global": {
-      "anchors": [
+    "topbarLinks": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+            "name": "Support",
+            "url": "mailto:hi@mintlify.com"
         }
-      ]
-    }
-  },
+    ],
+    "dropdown": [
+        {
+            "name": "Documentation",
+            "url": "documentation"
+        },
+        {
+            "name": "API Reference",
+            "url": "api-reference"
+        },
+        {
+            "name": "Changelog",
+            "url": "changelog"
+        }
+    ],
+    "navigation": [
+        {
+            "group": "Documentation",
+            "pages": [
+                "documentation/introduction",
+                "documentation/quickstart",
+                "documentation/authentication",
+                "documentation/references/metadata",
+                "documentation/references/testcards",
+                "documentation/references/webhook",
+                "documentation/references/sandbox"
+            ]
+        },
+        {
+            "group": "Payments",
+            "pages": [
+                {
+                    "group": "Payment Links",
+                    "pages": [
+                        "api-reference/endpoint/create",
+                        "api-reference/endpoint/delete",
+                        "api-reference/endpoint/get",
+                        "api-reference/endpoint/get-by-filter"
+                    ]
+                }
+            ]
+        },
+        {
+            "group": "Transactions",
+            "pages": [
+                {
+                    "group": "Transaction Status",
+                    "pages": [
+                        "api-reference/endpoint/transaction/get-transaction",
+                        "api-reference/endpoint/transaction/transaction-by-id"
+                    ]
+                }
+            ]
+        },
+        {
+            "group": "Business",
+            "pages": [
+                {
+                    "group": "Business Details",
+                    "pages": [
+                        "api-reference/endpoint/business/get"
+                    ]
+                }
+            ]
+        },
+        {
+            "group": "Payout",
+            "pages": [
+                {
+                    "group": "Payout Summary",
+                    "pages": [
+                        "api-reference/endpoint/payout/get",
+                        "api-reference/endpoint/payout/get-all-payouts"
+                    ]
+                }
+            ]
+        },
+        {
+            "group": "Changelog",
+            "pages": [
+                "changelog/changelog"
+            ]
+        }
+    ],
     "specs": "./api-reference/openapi.json",
     "footerSocials": {
         "x": "https://x.com/mintlify",
